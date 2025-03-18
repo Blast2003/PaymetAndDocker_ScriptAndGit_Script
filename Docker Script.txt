@@ -16,7 +16,7 @@ CMD ["npm", "start"]
 
 
 
-
+// Frontend
 
 + List images: 
 	docker images
@@ -42,5 +42,65 @@ CMD ["npm", "start"]
 
 + Pull image from Docker Hub:
 	docker pull blast11/paypal_payment	
+
+
+
+// Backend include: server + database
+
++ Need to create "docker-compose.yml" => run multiple images in one container => create network and after that create e-checking + database
+
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "3002:3002"
+    env_file: .env
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+
+
++ Run compose 
+	docker-compose up --build
+
++ Change in .evn: (because we use mongo compass from local not use on cloud), if use on cloud => don't need to create "docker-compose.yml"
+	change from MONGO_DB= mongodb://"localhost":27017/E-Checking to MONGO_DB=mongodb://"mongo":27017/E-Checking 
+
+
+
+// Production
+
+
+
+
+// Use docker compose to pull and update images
+
+Note: Only run when terminal locate in directory contain docker-compose.yml
+
++ Pull all images: docker compose pull
+
++ Update and run images with the latest version: docker compose up -d
+
+
++ Run multiple images  (-d = run in detach mode)
+	docker-compose up -d 
+
+
++ Verify containers are running: (one container are running contain one image and having one largest container contain all of small container )
+	docker-compose ps
+
+
+
+
+
+
+
 
 
