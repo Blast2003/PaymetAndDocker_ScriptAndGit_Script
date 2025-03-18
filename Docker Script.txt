@@ -35,13 +35,50 @@ CMD ["npm", "start"]
 	docker run -p 5173:5173 paypal_payment (specific host)  
 
 
-+ Push image to Docker Hub:
 
-  Step 1: tag => docker tag paypal_payment blast11/paypal_payment (tag lastest as default)
-  Step 2: push => docker push blast11/paypal_payment
 
-+ Pull image from Docker Hub:
-	docker pull blast11/paypal_payment	
+// Docker Hub:
+  + Push images
+      Step 1: tag => docker tag paypal_payment blast11/paypal_payment (tag lastest as default)
+
+      Step 2: push => docker push blast11/paypal_payment
+
+
+
+
+ + Pull images from Docker Hub:
+	    docker pull blast11/paypal_payment	
+      docker pull blast11/mongo	
+
+
+
+
+  + Run multiple image after pulling images from Docker Hub
+      Step 1: Go to new directory
+
+      Step 2: Create docker-compose.yml file:
+              version: "3.8"
+
+              services:
+                app:
+                  image: blast11/name:app
+                  ports:
+                    - "3002:3002"
+                  env_file: .env
+                  depends_on:
+                    - mongo
+
+                mongo:
+                  image: blast11/name:mongo
+                  restart: always
+                  ports:
+                    - "27017:27017"
+
+      Step 3: If have .evn => must to create .env clone from the main project
+
+      Step 4: docker-compose up -d
+
+
 
 
 
@@ -95,6 +132,10 @@ Note: Only run when terminal locate in directory contain docker-compose.yml
 
 + Verify containers are running: (one container are running contain one image and having one largest container contain all of small container )
 	docker-compose ps
+
+
+
+
 
 
 
