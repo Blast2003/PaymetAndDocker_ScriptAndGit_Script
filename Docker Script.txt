@@ -1,0 +1,46 @@
+DockerFile:
+
+FROM node:23-alpine AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+// EXPOSE 5173 => optional: expose for all container inside to let them know 
+
+CMD ["npm", "start"]
+
+
+
+
+
++ List images: 
+	docker images
+
++ build images: 
+	docker build -t paypal_payment .
+
++ remover image (tag lastest): 
+	docker rmi paypal_payment
+
++ run image to create container:
+	docker run -p 5173 paypal_payment (random host)
+
+	// have option -p = expose + publish = publish to world and for container inside this container
+	
+	docker run -p 5173:5173 paypal_payment (specific host)  
+
+
++ Push image to Docker Hub:
+
+  Step 1: tag => docker tag paypal_payment blast11/paypal_payment (tag lastest as default)
+  Step 2: push => docker push blast11/paypal_payment
+
++ Pull image from Docker Hub:
+	docker pull blast11/paypal_payment	
+
+

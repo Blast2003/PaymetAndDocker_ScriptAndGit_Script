@@ -1,0 +1,16 @@
+…or create a new repository on the command line
+	echo "# PaymetAndDockerScript" >> README.md
+	git init
+	"if the first commit with empty folder: git add README.md "
+	"already contain content: git add ."
+	git add .
+	git commit -m "first commit"
+	git branch -M main
+	git remote add origin https://github.com/Blast2003/PaymetAndDockerScript.git
+	git push -u origin main
+
+
+…or push an existing repository from the command line
+	git remote add origin https://github.com/Blast2003/PaymetAndDockerScript.git
+	git branch -M main
+	git push -u origin main
